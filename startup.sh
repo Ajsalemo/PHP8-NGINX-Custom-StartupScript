@@ -1,8 +1,5 @@
 #!/bin/sh
 echo "Running custom startup script from $PWD.."
-echo "Installing nginx-extras.."
-apt-get update
-apt-get install nginx-extras
 # Copy our 'local' nginx.conf to override the generated one on App Service under /etc/nginx/nginx.conf
 cp /home/site/wwwroot/nginx.conf /etc/nginx/nginx.conf
 # Enter the source directory to make sure the script runs where the user expects
