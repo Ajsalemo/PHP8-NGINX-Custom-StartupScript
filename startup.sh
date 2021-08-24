@@ -5,8 +5,12 @@ cd /home/site/wwwroot
 export NGINX_PORT=8080
 
 if [  -n "$PHP_ORIGIN" ] && [ "$PHP_ORIGIN" = "php-fpm" ]; then
-   # Copy our 'local' nginx.conf to override the generated one on App Service under /etc/nginx/nginx.conf
-   cp /home/site/wwwroot/nginx.conf /etc/nginx/nginx.conf
+  FILE=/home/site/wwwroot/nginx.conf
+   if [ -f "$FILE" ]; then
+      echo "$FILE exists."
+      # Copy our 'local' nginx.conf to override the generated one on App Service under /etc/nginx/nginx.conf
+      cp /home/site/wwwroot/nginx.conf /etc/nginx/nginx.conf
+   fi
    export NGINX_DOCUMENT_ROOT='/home/site/wwwroot'
    # This needs to be reloaded instead of started for changes to take effect
    service nginx reload
